@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Invoice</title>
+  <style>
+  {% if css %}
+    {{ css }}
+  {% endif %}
+  </style>
+</head>
+<body>
+<header>
+  <div class="row">
+    <div class="column-banner-left">
+      <div class="logo">
+        {% if logo %}
+          <img style="width: auto; height: 35px;" class="company-img" alt="Company Logo" src="data:image/png;base64, {{ logo | safe }}">
+        {% endif %}
+        <!-- {{ company_name }} -->
+        <br>
+      </div>
+    </div>
+    <div class="column-banner-middle">
+    </div>
+    <div class="column-banner-right">
+      <div>
+        <div class="invoice-title">INVOICE</div>
+        <div class="invoice-id"># {{ invoice_id }}</div>
+      </div>
+      <div style="width: 23%; float: right;">
+        <table class="date-table">
+          <tbody>
+          <tr>
+            <td class="field-title">Date:</td>
+            <td>{{ invoice_date }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="column-company" style="float: left">
+      <div>
+        <b>{{ company_name }}</b><br>
+        <address>
+          {{ company_detail | safe }}
+        </address>
+        <br>
+      </div>
+    </div>
+    <div style="float: left">
+      <div class="column-bill-to">
+        <font class="field-title">Bill To:</font>
+      </div>
+      <div class="column-client">
+        <div style="width: 100%;">
+          {{ client_name }}<br>
+          <address>
+            {{ client_detail | safe }}
+          </address>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<section>
+  <article>
+    <div>
+      <table>
+        <colgroup>
+          <col width="45%">
+          <col width="15%">
+          <col span="2" width="20%">
+        </colgroup>
+        <thead>
+        <tr align="left">
+          <th>Item</th>
+          <th>Units</th>
+          <th>Unit Price</th>
+          <th>Amount</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>{{ items.name }}</td>
+          <td class="bottomtable">{{ items.qty }}</td>
+          <td class="bottomtable">{{ currency | safe }}{{ items.prc }}</td>
+          <td class="bottomtable">{{ currency | safe }}{{ items.prc }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="width: 55%; float: right;">
+      <table style="border-top: 2px solid;">
+        <colgroup>
+          <col width="35%">
+          <col width="20%">
+        </colgroup>
+        <tbody>
+          <tr class="balance">
+            <th align="left">Subtotal</th>
+            <td>{{ currency | safe }}{{ total_final }}</td>
+          </tr>
+          <tr style="background-color: #ffffff;">
+            <th align="left">Total</th>
+            <td>{{ currency | safe }}{{ total_final }}</td>
+          </tr>
+          <tr>
+            <th align="left">Amount paid</th>
+            <td>{{ currency | safe }}{{ total_final }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </article>
+</section>
+<footer>
+  <div>
+    <p class="field-title">
+      Notes:
+    </p>
+    <p>
+      {{ footer_note | safe }}
+    </p>
+  </div>
+</footer>
+</body>
+<footer class="site-footer">
+  <div class="container">
+    <hr>
+    <div class="row">
+      <div class="col-md-8 col-sm-6 col-xs-12">
+        <p class="copyright-text">Copyright &copy; 2022 All Rights Reserved by GrammarIn .
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+</html>
